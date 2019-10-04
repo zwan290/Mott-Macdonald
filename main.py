@@ -14,7 +14,7 @@ import copy
 #cursor = conn.cursor()
 #cursor.execute('SELECT * FROM accumRainfall')
 
-#Transfer 1 hour Time into 3600s and caculate total value (mm)
+#caculate total value (mm)
 data = pd.read_csv('accumRainfall.csv')
 data = np.array(data)
 start_time = data[:,0].min()
