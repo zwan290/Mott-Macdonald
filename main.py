@@ -3,7 +3,18 @@ import pandas as pd
 import numpy as np
 import copy
 
+#database connection
+#import pyodbc
 
+#conn = pyodbc.connect('Driver={SQL Server};'
+#                      'Server=server_name;'
+#                      'Database=db_name;'
+#                      'Trusted_Connection=yes;')
+
+#cursor = conn.cursor()
+#cursor.execute('SELECT * FROM accumRainfall')
+
+#Transfer 1 hour Time into 3600s and caculate total value (mm)
 data = pd.read_csv('accumRainfall.csv')
 data = np.array(data)
 start_time = data[:,0].min()
@@ -19,7 +30,6 @@ accu_value =np.sum(data[:,1])
 print('The accumated rainfall is %f mm'%(accu_value*10/1000))
 
 # Find the peak 30 minute period within the supplied time range
-
 cal = 1
 i = 0
 max_value = 0
@@ -54,7 +64,5 @@ best_start = orign_time[min(index)]
 best_end =  orign_time[max(index)]
 print('The maximum accumulated value in 30-min interval is %s '%max_value)
 print('The maximum time interval is from %s to %s'%(best_start, best_end))
-
-
 
 
