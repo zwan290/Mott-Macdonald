@@ -1,4 +1,3 @@
-
 import pandas as pd
 import numpy as np
 import copy
@@ -14,7 +13,7 @@ import copy
 #cursor = conn.cursor()
 #cursor.execute('SELECT * FROM accumRainfall')
 
-#caculate total value (mm)
+#Transfer 1 hour Time into 3600s and caculate total value into (mm)
 data = pd.read_csv('accumRainfall.csv')
 data = np.array(data)
 start_time = data[:,0].min()
@@ -27,7 +26,7 @@ orign_time = copy.deepcopy(data[:,0])
 time = (data[:,0] - start_time)/second_span
 data[:,0] = time
 accu_value =np.sum(data[:,1])
-print('The accumated rainfall is %f mm'%(accu_value*10/1000))
+print('The accumated rainfall is %.4f mm'%(accu_value*10/1000))
 
 # Find the peak 30 minute period within the supplied time range
 cal = 1
@@ -62,7 +61,6 @@ index = ori_span[0].tolist()
 
 best_start = orign_time[min(index)]
 best_end =  orign_time[max(index)]
-print('The maximum accumulated value in 30-min interval is %s '%max_value)
+print('The maximum accumulated value in 30-min interval is %.4f mm'%(max_value*10/1000))
 print('The maximum time interval is from %s to %s'%(best_start, best_end))
-
 
